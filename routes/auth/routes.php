@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::group(['prefix' => '/auth'], function () {
+Route::group(['prefix' => '/'], function () {
 
     Route::get('/register', [\App\Http\Controllers\AuthController::class, 'register'])->name('auth.register.get');
     Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('auth.login.get');

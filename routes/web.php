@@ -4,11 +4,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(
-    base_path('routes\auth\routes.php')
+    base_path('routes\home\routes.php')
 );
 
-Route::get('/', function () {
-    return \auth()->user();
-})->name('welcome');
+Route::prefix('/auth')->group(
+    base_path('routes\auth\routes.php'),
+);
+
 
 Auth::routes(['verify' => true]);

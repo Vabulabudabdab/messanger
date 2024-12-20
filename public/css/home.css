@@ -1,0 +1,149 @@
+* {
+    padding: 0;
+    margin: 0;
+    background-color: #171a21;
+}
+
+.header {
+    border-radius: 10px;
+    border: 1px solid #882596;
+    width: 98%;
+    height: 50px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.logo {
+    margin: 10px 350px;
+    font-size: 21px;
+    color: white;
+}
+
+.content {
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    width: 60%;
+    height: 100%;
+}
+
+.left-panel {
+    width: 170px;
+    height: 700px;
+    border-radius: 10px;
+    border: 1px solid #882596;
+    margin-top: 5px;
+}
+
+.left-panel-item {
+    text-decoration: none;
+    text-align: center;
+    width: 90%;
+    margin-top: 5px;
+    height: 30px;
+    padding: 7px;
+    color: #727070;
+    transition: 0.5s;
+}
+
+.left-panel-item:hover {
+    color: white;
+}
+
+.main-panel {
+    display: flex;
+    width: 900px;
+    height: 350px;
+    border: 1px solid #882596;
+    border-radius: 10px;
+    margin-left: 100px;
+}
+
+.user-image-block {
+    margin: 150px 50px;
+}
+
+.profile-img {
+    width: 175px;
+    height: 150px;
+    border-radius: 100%;
+}
+
+.user-name {
+    margin-top: 260px;
+    margin-left: -40px;
+    color: #727070;
+    font-size: 23px;
+}
+
+.user-desc {
+    font-size: 15px;
+}
+
+.session_response {
+    color: #55b45f;
+    position: absolute;
+    margin: 50px;
+}
+
+.change-user-info {
+    width: 300px;
+    height: 100%;
+}
+
+.btn-change-img-profile {
+    height: 30px;
+    margin: 20px 180px;
+}
+
+.answer-change-profile {
+    width: 200px;
+    color: #727070;
+    font-size: 19px;
+    margin-left: 10px;
+}
+
+.btn-change-img-profile {
+    width: 200px;
+    height: 30px;
+}
+
+.input-user {
+    border-radius: 10px;
+    width: 190px;
+    padding: 10px;
+    border: 1px solid #882596;
+    cursor: pointer;
+}
+
+input::file-selector-button {
+    text-decoration: none;
+    border: 0px solid white;
+    background: none;
+    color: #727070;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+input::file-selector-button:hover {
+    color: white;
+}
+
+.btn-change-info-profile {
+    margin: 250px 180px;
+}
+
+.btn-user {
+    width: 210px;
+    padding: 10px;
+    height: 40px;
+    border: 1px solid #882596;
+    color: #727070;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.btn-user:hover {
+    color: white;
+}

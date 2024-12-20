@@ -41,7 +41,7 @@ class AuthController extends BaseController {
         if($result == null) {
             return  redirect()->back()->with('error_login', 'Неверный логин или пароль!');
         } else {
-            return redirect()->route('welcome');
+            return redirect()->route('index.home');
         }
     }
 
