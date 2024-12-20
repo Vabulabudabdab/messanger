@@ -53,7 +53,8 @@
 
         {{--Create post form--}}
         <div class="create_post_show" id="create-post-form">
-            <form>
+            <form action="{{route('index.profile.create.post')}}" method="post" enctype="multipart/form-data">
+                @csrf
             <div class="name-post-create">
                 <div class="post-create-text">Название вашего поста:</div>
                 <input type="text" class="input-user" id="post_name_create" name="post_name">
@@ -61,12 +62,12 @@
 
             <div class="img-post-create">
                 <div class="post-create-text">Изображение поста(не обязательно)</div>
-                <input type="file" class="input-user" name="post_image">
+                <input type="file" class="input-user" name="image">
             </div>
 
             <div class="text-post-create">
                 <div class="post-create-text">Текст вашего поста(Ограчение в 300 символов):</div>
-                <textarea name="text" class="textarea-user" id="post_name_create"></textarea>
+                <textarea name="text"  class="textarea-user" id="post_name_create"></textarea>
             </div>
 
             <div class="create-post-btn">
@@ -77,22 +78,33 @@
         {{-- End create post form--}}
 
         {{-- user posts--}}
-        <div class="user_posts">
-            <div class="user_post_image">
-                <img src="{{asset('storage/' . $user->image)}}" class="profile-img-post">
-                <div class="post-user-name">{{$user->name}}</div>
+        @foreach($user_posts as $post)
+            <div class="user_posts">
+                <div class="user_post_image">
+                    <img src="{{asset('storage/' . $user->image)}}" class="profile-img-post">
+                    <div class="post-user-name">{{$post->user->name}}</div>
+                </div>
+                <div class="post_profile_name">
+                    {{$post->post_name}}
+                </div>
+                <div class="post_image">
+                    <img src="{{asset('storage/' . $post->image)}}" class="post_profile_image">
+                </div>
+                <div class="post_text">
+                    {{$post->text}}
+                </div>
+                <div class="post-like-comments">
+                    <form action="{{route('index.profile.post.like', $post->id)}}"
+                          id="post-like" method="post" enctype="multipart/form-data">
+                        @csrf
+
+                        <button type="submit" style="background: none; border: 0px;"><img src="{{asset('assets/heart.svg')}}" class="red-fill"></button>
+                    </form>
+                    <div class="like_count"></div>
+                    {{--                <img src="{{asset('assets/heart-fill.svg')}}" class="red-fill">--}}
+                </div>
             </div>
-            <div class="post_text">
-                I will be a GOD, I will learn all what I can, ALL UNIVERSE WILL FALL BEFORE ME
-                I will be a GOD, I will learn all what I can, ALL UNIVERSE WILL FALL BEFORE ME
-                I will be a GOD, I will learn all what I
-            </div>
-            <div class="post-like-comments">
-                <img src="{{asset('assets/heart.svg')}}" class="red-fill">
-                <div class="like_count">12</div>
-                {{--                <img src="{{asset('assets/heart-fill.svg')}}" class="red-fill">--}}
-            </div>
-        </div>
+        @endforeach
         {{--end user posts--}}
     </div>
 

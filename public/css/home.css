@@ -191,7 +191,7 @@ input::file-selector-button:hover {
         text-align: left;
         margin-left: 20px;
         width: 90%;
-        margin-top: 50px;
+        margin-top: 30px;
         color: #727070;
     }
 }
@@ -288,4 +288,22 @@ input::file-selector-button:hover {
 
 #post_name_create:focus {
     outline: none;
+}
+
+.post_image {
+    text-align: center;
+    margin-top: -30px;
+}
+
+.post_profile_image {
+    text-align: center;
+    width: 90%;
+}
+
+.post_profile_name {
+    text-align: left;
+    font-size: 23px;
+    color: white;
+    text-shadow: 1px 1px 10px white;
+    margin: 50px 30px;
 }

@@ -24,6 +24,9 @@
     function form_submit() {
         document.getElementById("change-img").submit();
     }
+    // function like_post() {
+    //     document.getElementById("post-like").submit();
+    // }
     function show_create_post_form() {
             var el = document.getElementById('create-post-form');
             el.style.display === 'block' ? el.style.display = 'none' : el.style.display = 'block';
