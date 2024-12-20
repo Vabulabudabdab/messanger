@@ -6,7 +6,7 @@
 
         <div class="left-panel">
             <div class="left-panel-item">
-                <a href="{{route('index.home')}}" class="left-panel-item">Профиль</a>
+                <a href="{{route('index.home', $user->id)}}" class="left-panel-item">Профиль</a>
             </div>
             <div class="left-panel-item">
                 <a href="" class="left-panel-item">Мессенджер</a>
@@ -18,13 +18,13 @@
                 {{session('success_change_avatar')}}
             </div>
             <div class="user-image-block">
-                <img src="{{asset('storage/' . auth()->user()->image)}}" class="profile-img">
+                <img src="{{asset('storage/' . $user->image)}}" class="profile-img">
             </div>
 
             <div class="user-name">
-                {{auth()->user()->name}}
+                {{$user->name}}
                 <div class="user-desc">
-                    {{auth()->user()->desc}}132
+                    {{$user->desc}}132
                 </div>
 
             </div>
@@ -44,8 +44,21 @@
                 </div>
             </div>
 
-
         </div>
+
+        <div class="create_post">
+            Создать пост
+        </div>
+
+        <div class="user_posts">
+            <div class="user_post_image">
+                <img src="{{asset('storage/' . $user->image)}}" class="profile-img-post">
+                <span class="post-user-name">{{$user->name}}</span>
+            </div>
+        </div>
+
+
+
 
     </div>
 
