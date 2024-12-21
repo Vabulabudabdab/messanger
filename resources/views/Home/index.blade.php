@@ -9,7 +9,7 @@
                 <a href="{{route('index.home', $user->id)}}" class="left-panel-item">Профиль</a>
             </div>
             <div class="left-panel-item">
-                <a href="" class="left-panel-item">Мессенджер</a>
+                Мессенджер
             </div>
         </div>
 
@@ -55,24 +55,24 @@
         <div class="create_post_show" id="create-post-form">
             <form action="{{route('index.profile.create.post')}}" method="post" enctype="multipart/form-data">
                 @csrf
-            <div class="name-post-create">
-                <div class="post-create-text">Название вашего поста:</div>
-                <input type="text" class="input-user" id="post_name_create" name="post_name">
-            </div>
+                <div class="name-post-create">
+                    <div class="post-create-text">Название вашего поста:</div>
+                    <input type="text" class="input-user" id="post_name_create" name="post_name">
+                </div>
 
-            <div class="img-post-create">
-                <div class="post-create-text">Изображение поста(не обязательно)</div>
-                <input type="file" class="input-user" name="image">
-            </div>
+                <div class="img-post-create">
+                    <div class="post-create-text">Изображение поста(не обязательно)</div>
+                    <input type="file" class="input-user" name="image">
+                </div>
 
-            <div class="text-post-create">
-                <div class="post-create-text">Текст вашего поста(Ограчение в 300 символов):</div>
-                <textarea name="text"  class="textarea-user" id="post_name_create"></textarea>
-            </div>
+                <div class="text-post-create">
+                    <div class="post-create-text">Текст вашего поста(Ограчение в 300 символов):</div>
+                    <textarea name="text" class="textarea-user" id="post_name_create"></textarea>
+                </div>
 
-            <div class="create-post-btn">
-                <button class="btn-user" type="submit">Создать пост</button>
-            </div>
+                <div class="create-post-btn">
+                    <button class="btn-user" type="submit">Создать пост</button>
+                </div>
             </form>
         </div>
         {{-- End create post form--}}
@@ -97,11 +97,21 @@
                     <form action="{{route('index.profile.post.like', $post->id)}}"
                           id="post-like" method="post" enctype="multipart/form-data">
                         @csrf
-
-                        <button type="submit" style="background: none; border: 0px;"><img src="{{asset('assets/heart.svg')}}" class="red-fill"></button>
+                        <button type="submit" style="background: none; border: 0px;">
+                            @if(\App\Models\PostsLikeds::where('post_id', $post->id)->count() >= 1)
+                                <img src="{{asset('assets/heart-fill.svg')}}" class="red-fill">
+                            @else
+                                <img src="{{asset('assets/heart.svg')}}" class="red-fill">
+                            @endif
+                        </button>
                     </form>
-                    <div class="like_count"></div>
-                    {{--                <img src="{{asset('assets/heart-fill.svg')}}" class="red-fill">--}}
+                    @foreach($postLikes as $like)
+                        @if($like->post_id == $post->id)
+                            <div class="like_count">{{\App\Models\PostsLikeds::where('post_id', $post->id)->count()}}</div>
+                        @endif
+                    @endforeach
+
+
                 </div>
             </div>
         @endforeach

@@ -1,8 +1,9 @@
-* {
+body {
     padding: 0;
     margin: 0;
-    background-color: #171a21 !important;
+    background: #171a21 !important;
 }
+
 
 a {
     outline: none !important;
@@ -16,12 +17,31 @@ a {
     height: 50px;
     margin: auto;
     margin-top: 10px;
+    display: flex;
 }
 
 .logo {
-    margin: 10px 350px;
+    margin: 6px 350px;
     font-size: 21px;
     color: white;
+}
+
+.theme {
+    margin: 6px 350px;
+    font-size: 21px;
+    color: white;
+}
+
+.theme_color {
+    cursor: pointer;
+    margin: -26px 120px;
+    width: 30px;
+    height: 27px;
+    border-radius: 100%;
+    font-size: 21px;
+    color: white;
+    border:1px solid white;
+    background-color: white !important;
 }
 
 .content {
@@ -119,13 +139,17 @@ a {
     width: 210px;
     padding: 5px;
     border: 1px solid #882596;
+    background: #171a21 !important;
     cursor: pointer;
 }
+
+
 
 .textarea-user {
     border-radius: 10px;
     width: 90%;
     height: 200px;
+    background: #171a21 !important;
     padding: 5px;
     border: 1px solid #882596;
     cursor: pointer;
@@ -146,20 +170,29 @@ input::file-selector-button:hover {
 
 .btn-change-info-profile {
     margin: 230px 180px;
+    background-color: #171a21;
 }
 
 .btn-user {
+    outline: none;
     width: 210px;
     padding: 6px;
     height: 40px;
     border: 1px solid #882596;
     color: #727070;
+    background: #171a21 !important;
     border-radius: 10px;
     cursor: pointer;
     transition: 0.5s;
 }
 
+.btn-user:focus {
+    outline: none;
+    border: 1px solid #5ce75f;
+}
+
 .btn-user:hover {
+    outline: none;
     color: white;
 }
 
@@ -224,8 +257,22 @@ input::file-selector-button:hover {
 .red-fill {
     width: 30px;
     height: 26px;
-    background-color: #fa0000;
     display: block;
+}
+
+.red-fill:focus {
+    outline: none;
+    text-decoration: none;
+}
+
+.red-fill:enabled {
+    outline: none;
+    text-decoration: none;
+}
+
+.red-fill:hover {
+    outline: none;
+    text-decoration: none;
 }
 
 .like_count {
@@ -306,4 +353,9 @@ input::file-selector-button:hover {
     color: white;
     text-shadow: 1px 1px 10px white;
     margin: 50px 30px;
+}
+
+.like_count_false {
+    margin: -25px 33px;
+    color: white;
 }

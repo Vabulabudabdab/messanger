@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\EditUserImageRequest;
 use App\Models\Post;
+use App\Models\PostsLikeds;
 use App\Models\User;
 
 class HomeController extends BaseController {
@@ -12,8 +13,9 @@ class HomeController extends BaseController {
     public function index(User $user) {
 
         $user_posts = Post::where('user_id', $user->id)->get();
-
-        return view('Home.index', compact('user', 'user_posts'));
+        $postLikes = PostsLikeds::where('user_id', $user->id)->get();
+        $count = 0;
+        return view('Home.index', compact('user', 'user_posts', 'postLikes', 'count'));
     }
 
     public function edit_image(User $user,EditUserImageRequest $request)

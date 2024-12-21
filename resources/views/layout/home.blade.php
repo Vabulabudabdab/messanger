@@ -9,24 +9,37 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Auth</title>
 </head>
-<body>
+<body style=" color: white!important; ">
 
 <div class="header">
     <div class="logo">
         Messanger
     </div>
+
+{{--    <div class="theme">--}}
+{{--        Тема сайта:--}}
+{{--        <div class="theme_color" onclick="change_theme()" id="theme_color"></div>--}}
+{{--    </div>--}}
+
+
+
 </div>
 
 @yield('content')
 
 </body>
 <script>
+
+    function change_theme() {
+        document.body.style.background === "white" ? document.body.style.background = "#171a21" : document.body.style.background = "white";
+        document.body.style.color === "white" ? document.body.style.color = "black" : document.body.style.color = "white";
+        document.a.style.hover === "white" ? document.body.style.hover = "black" : document.body.style.hover = "white";
+    }
+
     function form_submit() {
         document.getElementById("change-img").submit();
     }
-    // function like_post() {
-    //     document.getElementById("post-like").submit();
-    // }
+
     function show_create_post_form() {
             var el = document.getElementById('create-post-form');
             el.style.display === 'block' ? el.style.display = 'none' : el.style.display = 'block';
