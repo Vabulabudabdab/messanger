@@ -52,7 +52,7 @@ class AuthService
             DB::rollback();
         }
 
-
+         return $user;
     }
 
     /**

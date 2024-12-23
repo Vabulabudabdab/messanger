@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/home.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Auth</title>
+    <title>Messanger</title>
 </head>
 <body style=" color: white!important; ">
 
@@ -15,6 +15,26 @@
     <div class="logo">
         Messanger
     </div>
+
+    <div class="search-friend">
+        <form action="{{route('index.profile.search.friend')}}" onsubmit="search_friend_form()" id="form-srch-frnd" method="post">
+            @csrf
+            <input type="search" class="input-user" placeholder="Найти пользователя" name="user_name" style="outline: none; color: white; width: 270px; margin-top: 6px; margin-left: -270px">
+        </form>
+
+    </div>
+
+    <a href="{{route('index.friends.requests')}}" class="btn-user"  style="outline: none; text-align: center; width: 170px; margin-top: 4px; margin-left: 170px" id="friend_request">Заявки в друзья</a>
+
+
+    <form action="{{route('logoff')}}" method="post">
+        @csrf
+
+        <button type="submit" class="btn-user" style="outline: none; text-align: center; width: 170px; margin-top: 4px; margin-left: 270px" id="logout_button">Выйти</button>
+
+    </form>
+
+
 
 {{--    <div class="theme">--}}
 {{--        Тема сайта:--}}
@@ -34,6 +54,10 @@
         document.body.style.background === "white" ? document.body.style.background = "#171a21" : document.body.style.background = "white";
         document.body.style.color === "white" ? document.body.style.color = "black" : document.body.style.color = "white";
         document.a.style.hover === "white" ? document.body.style.hover = "black" : document.body.style.hover = "white";
+    }
+
+    function search_friend_form() {
+        document.getElementById("form-srch-frnd").submit();
     }
 
     function form_submit() {

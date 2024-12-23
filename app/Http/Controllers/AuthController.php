@@ -7,12 +7,19 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\RestorePasswordRequest;
 use App\Models\RestorePassword;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class AuthController extends BaseController {
 
     public function register() {
         return view('auth.register');
+    }
+
+    public function logout() {
+        $test = Auth::logout();
+
+        return redirect()->route('auth.login.get');
     }
 
     /**
@@ -23,9 +30,9 @@ class AuthController extends BaseController {
 
         $data = $request->validated();
 
-        $this->authService->register_post($data);
+        $user = $this->authService->register_post($data);
 
-        return redirect()->route('welcome');
+        return redirect()->route('index.home', $user->id);
     }
 
     /**
@@ -41,7 +48,7 @@ class AuthController extends BaseController {
         if($result == null) {
             return  redirect()->back()->with('error_login', 'Неверный логин или пароль!');
         } else {
-            return redirect()->route('index.home');
+            return redirect()->route('index.home', auth()->user()->id);
         }
     }
 
