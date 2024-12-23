@@ -31,7 +31,7 @@
                     <form action="{{route('index.add.friend.request', $user->id)}}" method="post">
                         @csrf
                         <button type="submit" class="btn-user" id="friend_request"
-                                style="margin-left: 30px; margin-top: 20px;">Принять
+                                style="margin-left: 10px; margin-top: 20px;">Принять
                         </button>
                     </form>
 

@@ -14,21 +14,12 @@
         </div>
 
 
-        @if($users->count() >= 1)
+        @if(!empty($users) && $users->count() >= 1)
             @foreach($users as $user)
 
+                {{--Цикл для проверки друга--}}
                 @if($user->id == auth()->user()->id)
                     {{--Не вывожу пользователя--}}
-
-                    {{--Цикл для проверки друга--}}
-                    @foreach($user->friend_exists as $fr_exists)
-                        @if($user->id == $fr_exists->friend_id)
-                        @else
-
-                        @endif
-                    @endforeach
-
-                    {{--Конец цикла--}}
                 @else
                     {{--Вывожу пользователя--}}
                     <div class="search_friend_block">
@@ -42,36 +33,26 @@
                             </div>
                         </div>
                         {{--Buttons check start--}}
-                        @if($user->friends_requests->count() >= 1)
-                            @foreach($user->friends_requests as $exists_request)
-                                @if($user->id == $exists_request->id)
-                                    <form action="{{route('index.add.friend', $user->id)}}" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn-user" id="logout_button"
-                                                style="margin-top: 20px; margin-left: 200px">Добавить
-                                        </button>
-                                    </form>
-                                @else
-                                    <form action="{{route('index.delete.friend', $user->id)}}" method="post">
-                                        @csrf
-                                        <button type="submit" class="btn-user" id="logout_button"
-                                                style="margin-top: 20px; margin-left: 200px">Отменить заявку
-                                        </button>
-                                    </form>
-                                @endif
-                            @endforeach
+                @if(!empty($user->friend->to_user) && $user->friend->to_user == $user->id)
+                            <form action="{{route('delete.friend.request', $user->id)}}" method="post">
+                                @csrf
+                                <button type="submit" class="btn-user" id="logout_button"
+                                        style="margin-top: 20px; margin-left: 200px">Отменить заявку
+                                </button>
+                            </form>
                         @else
+
                             <form action="{{route('index.add.friend', $user->id)}}" method="post">
                                 @csrf
                                 <button type="submit" class="btn-user" id="logout_button"
                                         style="margin-top: 20px; margin-left: 200px">Добавить
                                 </button>
                             </form>
+
                         @endif
                         {{--Buttons check end--}}
                     </div>
                 @endif
-
             @endforeach
         @else
 

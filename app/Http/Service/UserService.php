@@ -48,7 +48,7 @@ class UserService
                 'post_name' => $post_name,
                 'image' => $image,
                 'text' => $post_text,
-                'user_id' => auth()->user()->id
+                'to_user' => auth()->user()->id
             ]);
 
             $post->relatedUsers()->attach(auth()->user()->id);
@@ -116,23 +116,23 @@ class UserService
 
     }
 
-    public function addFriendRequest(User $user) {
+    public function addFriendRequest(User $user)
+    {
 
         $check_request_friend = FriendsUsers::where([
-            ['user_id', $user->id],
-            ['from_id', auth()->user()->id]
+            ['to_user', $user->id],
+            ['from_user', auth()->user()->id]
 
         ])->first();
 
-        if($check_request_friend == null) {
+        if ($check_request_friend == null) {
             try {
                 DB::beginTransaction();
 
 
                 $result = FriendsUsers::create([
-                    'status' => 2,
-                    'user_id' => $user->id,
-                    'from_id' => auth()->user()->id
+                    'to_user' => $user->id,
+                    'from_user' => auth()->user()->id
                 ]);
 
 //            $result = auth()->user()->friends()->toggle($post->id);
@@ -150,28 +150,29 @@ class UserService
 
     public function addFriendRequestList(User $user)
     {
-
         $check_request_friend = FriendsUsers::where([
-            ['user_id', auth()->user()->id],
-            ['from_id', $user->id]
-
+            ['to_user', $user->id],
+            ['from_user', auth()->user()->id]
         ])->first();
 
-        if($check_request_friend != null) {
+        $check_friend = Friends::where([
+            ['to_user', $user->id],
+            ['from_user', auth()->user()->id]
+        ])->first();
+
+        if ($check_request_friend != null && $check_friend == null) {
             try {
                 DB::beginTransaction();
 
                 $check_request_friend = FriendsUsers::where([
-                    ['user_id', $user->id],
-                    ['from_id', auth()->user()->id]
+                    ['to_user', $user->id],
+                    ['from_user', auth()->user()->id]
                 ])->delete();
-
-//                $result = Friends::create([
-//                    'user_id' => $user->id,
-//                    'from_id' => auth()->user()->id
-//                ]);
-
-            $result = auth()->user()->friends()->toggle($user->id);
+                dd($check_request_friend);
+                $result = Friends::create([
+                    'to_user' => $user->id,
+                    'from_user' => auth()->user()->id
+                ]);
 
                 DB::commit();
             } catch (\Exception $exception) {
@@ -183,22 +184,14 @@ class UserService
         }
     }
 
-    public function deleteFriendRequest(User $user) {
+    public function deleteFriendRequest(User $user)
+    {
 
-        try {
-            DB::beginTransaction();
-
-            $check_request_friend = FriendsUsers::where([
-                ['user_id', $user->id],
-                ['from_id', auth()->user()->id]
-            ])->delete();
-
-            DB::commit();
-        } catch (\Exception $exception) {
-            dd($exception);
-            DB::rollBack();
-        }
-
+        $check_request_friend = FriendsUsers::where([
+            ['to_user', $user->id],
+            ['from_user', auth()->user()->id]
+        ])->delete();
+        dd($check_request_friend);
     }
 
     public function deleteFriendRequestList(User $user)
@@ -207,15 +200,14 @@ class UserService
         try {
             DB::beginTransaction();
             $check_request_friend = Friends::where([
-                ['user_id', $user->id],
-                ['friend_id', auth()->user()->id]
+                ['to_user', $user->id],
+                ['from_user', auth()->user()->id]
             ])->delete();
             DB::commit();
         } catch (\Exception $exception) {
             dd($exception);
             DB::rollBack();
         }
-
 
 
     }

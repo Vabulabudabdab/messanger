@@ -15,7 +15,7 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
     Route::post('/add/friend/{user}', [\App\Http\Controllers\HomeController::class, 'add_friend_request'])->name('index.add.friend');
     Route::post('/friends/add/friend/{user}', [\App\Http\Controllers\HomeController::class, 'add_friend_request_from_list'])->name('index.add.friend.request');
 
-    Route::post('/delete/friend/{user}', [\App\Http\Controllers\HomeController::class, 'delete_friend_request'])->name('index.delete.friend');
+    Route::post('/delete/friend/{user}', [\App\Http\Controllers\HomeController::class, 'delete_friend_request'])->name('delete.friend.request');
 
     Route::post('/friends/delete/friend/{user}', [\App\Http\Controllers\HomeController::class, 'delete_friend_request_from_list'])->name('index.delete.request.friend');
 

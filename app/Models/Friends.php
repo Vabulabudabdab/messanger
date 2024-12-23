@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Friends extends Model
 {
-    protected $table = 'friends';
+    protected $table = 'friends_saved';
 
-    protected $fillable = ['user_id', 'friend_id'];
+    protected $fillable = ['from_user', 'to_user'];
 
-
+    public function user() {
+        return $this->hasMany(User::class, 'id', 'from_user');
+    }
 
 }

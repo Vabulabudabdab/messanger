@@ -82,15 +82,23 @@
                 Друзья
             </div>
             <div class="friend">
+                {{--Вывод друга--}}
+                @foreach($user->friend_exists as $friend)
+                {{--Движение по зависимостям--}}
+                @foreach($friend->user as $fr_user)
+
                 <div class="friend-pnl-data">
-                    <a href="{{route('index.home', $user->id)}}"><img src="{{asset('storage/'. $user->image)}}" class="friend-icon"></a>
+                    <a href="{{route('index.home', $fr_user->id)}}"><img src="{{asset('storage/'. $fr_user->image)}}" class="friend-icon"></a>
                     <div class="friend-pnl-ans">
-                        {{$user->name}}
+                        {{$fr_user->name}}
                     </div>
                 </div>
-
+                    @endforeach
+                {{--Движение по зависимостям конец--}}
+                @endforeach
+                {{--Вывод друга конец--}}
                 <div class="friends-panel-more">
-                    Друзья: 1
+                    Друзья: {{$user->friend_exists->count()}}
                 </div>
 
             </div>

@@ -27,9 +27,9 @@ class HomeController extends BaseController
     public function friend_requests()
     {
 
-        $check_users = FriendsUsers::where('user_id', auth()->user()->id)->get();
+        $check_users = FriendsUsers::where('to_user', auth()->user()->id)->get();
 
-        $users = User::whereIn('id', $check_users->pluck('from_id'))->get();
+        $users = User::whereIn('id', $check_users->pluck('to_user'))->get();
 
         return view('home.friends-requests', compact('users'));
     }
@@ -41,8 +41,9 @@ class HomeController extends BaseController
 
         $users = $this->userService->searchFriend($data);
 
-        $exists_friend = Friends::where('friend_id', auth()->user()->id)->get();
-        $exists_requests = FriendsUsers::where('from_id', auth()->user()->id)->get();
+        $exists_friend = Friends::where('from_user', auth()->user()->id)->get();
+
+        $exists_requests = FriendsUsers::where('from_user', auth()->user()->id)->get();
 
         if ($users !== null) {
             return view('home.search-friends', compact('users', 'exists_friend', 'exists_requests'));
