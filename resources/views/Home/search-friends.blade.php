@@ -33,22 +33,28 @@
                             </div>
                         </div>
                         {{--Buttons check start--}}
-                @if(!empty($user->friend->to_user) && $user->friend->to_user == $user->id)
+                @if(!empty($user->friend->to_user) && $user->friend->status == 2)
                             <form action="{{route('delete.friend.request', $user->id)}}" method="post">
                                 @csrf
                                 <button type="submit" class="btn-user" id="logout_button"
                                         style="margin-top: 20px; margin-left: 200px">Отменить заявку
                                 </button>
                             </form>
-                        @else
+                        @elseif(!empty($user->friend->to_user) && $user->friend->status == 1)
 
+                            <form action="{{route('delete.friend.request', $user->id)}}" method="post">
+                                @csrf
+                                <button type="submit" class="btn-user" id="logout_button"
+                                        style="margin-top: 20px; margin-left: 200px">Удалить из друзей
+                                </button>
+                            </form>
+                        @else
                             <form action="{{route('index.add.friend', $user->id)}}" method="post">
                                 @csrf
                                 <button type="submit" class="btn-user" id="logout_button"
-                                        style="margin-top: 20px; margin-left: 200px">Добавить
+                                        style="margin-top: 20px; margin-left: 200px">Добавить в друзья
                                 </button>
                             </form>
-
                         @endif
                         {{--Buttons check end--}}
                     </div>

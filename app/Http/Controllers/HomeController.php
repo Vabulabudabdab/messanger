@@ -11,6 +11,8 @@ use App\Models\FriendsUsers;
 use App\Models\Post;
 use App\Models\PostsLikeds;
 use App\Models\User;
+
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends BaseController
@@ -23,8 +25,10 @@ class HomeController extends BaseController
         $postLikes = PostsLikeds::where('user_id', $user->id)->get();
 
 
-        $friends =  FriendsUsers::where('to_user', $user->id)->orWhere('from_user', $user->id)->get();
-
+//        $friends =  FriendsUsers::where('to_user', $user->id)->orWhere('from_user', $user->id)->get();
+        $friends =  FriendsUsers::where('to_user', $user->id)->orWhere(function (Builder $query) use ($user) {
+            $query->where('from_user', $user->id)->where('status', 1);
+        })->get();
 
 //        (friend_one="$user_id" OR friend_two="$user_id")
 //        AND

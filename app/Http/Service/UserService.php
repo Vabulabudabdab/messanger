@@ -132,7 +132,8 @@ class UserService
 
                 $result = FriendsUsers::create([
                     'to_user' => $user->id,
-                    'from_user' => auth()->user()->id
+                    'from_user' => auth()->user()->id,
+                    'status' => 2
                 ]);
 
 //            $result = auth()->user()->friends()->toggle($post->id);
@@ -159,7 +160,7 @@ class UserService
                         'status' => 1
                     ]);
 
-                dd($check_request_friend);
+
 
                 DB::commit();
             } catch (\Exception $exception) {

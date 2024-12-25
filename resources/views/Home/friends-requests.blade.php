@@ -16,7 +16,7 @@
 
 
         @foreach($users as $user)
-
+            @if(!empty($user->friend->status) && $user->friend->status == 2)
             <div class="search_friend_block">
 
                 <img src="{{asset('storage/'.$user->image)}}" class="search-img-friend">
@@ -42,8 +42,7 @@
                         </button>
                     </form>
                 </div>
-
-
+                @endif
             </div>
 
         @endforeach

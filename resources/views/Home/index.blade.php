@@ -86,7 +86,8 @@
                 @foreach($friends as $friend)
                 {{--Движение по зависимостям--}}
 
-                @if($friend->to_user == $user->id)
+                @if($friend->to_user == $user->id && $friend->status == 1)
+
                         @foreach($friend->user_from as $friend_user)
                             <div class="friend-pnl-data">
                                 <a href="{{route('index.home', $friend_user->id)}}"><img src="{{asset('storage/'. $friend_user->image)}}" class="friend-icon"></a>
@@ -96,8 +97,7 @@
                             </div>
                             {{--Движение по зависимостям конец--}}
                         @endforeach
-                @else
-
+                @elseif($friend->to_user != $user->id && $friend->status == 1)
                         @foreach($friend->user as $friend_user)
                             <div class="friend-pnl-data">
                                 <a href="{{route('index.home', $friend_user->id)}}"><img src="{{asset('storage/'. $friend_user->image)}}" class="friend-icon"></a>
@@ -113,7 +113,11 @@
                 @endforeach
                 {{--Вывод друга конец--}}
                 <div class="friends-panel-more">
+                    @if($friends->pluck('status')->first() != 2)
                     Друзья: {{$friends->count()}}
+                    @else
+                        Друзья: 0
+                    @endif
                 </div>
 
             </div>
