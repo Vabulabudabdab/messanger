@@ -83,22 +83,37 @@
             </div>
             <div class="friend">
                 {{--Вывод друга--}}
-                @foreach($user->friend_exists as $friend)
+                @foreach($friends as $friend)
                 {{--Движение по зависимостям--}}
-                @foreach($friend->user as $fr_user)
 
-                <div class="friend-pnl-data">
-                    <a href="{{route('index.home', $fr_user->id)}}"><img src="{{asset('storage/'. $fr_user->image)}}" class="friend-icon"></a>
-                    <div class="friend-pnl-ans">
-                        {{$fr_user->name}}
-                    </div>
-                </div>
-                    @endforeach
-                {{--Движение по зависимостям конец--}}
+                @if($friend->to_user == $user->id)
+                        @foreach($friend->user_from as $friend_user)
+                            <div class="friend-pnl-data">
+                                <a href="{{route('index.home', $friend_user->id)}}"><img src="{{asset('storage/'. $friend_user->image)}}" class="friend-icon"></a>
+                                <div class="friend-pnl-ans">
+                                    {{$friend_user->name}}
+                                </div>
+                            </div>
+                            {{--Движение по зависимостям конец--}}
+                        @endforeach
+                @else
+
+                        @foreach($friend->user as $friend_user)
+                            <div class="friend-pnl-data">
+                                <a href="{{route('index.home', $friend_user->id)}}"><img src="{{asset('storage/'. $friend_user->image)}}" class="friend-icon"></a>
+                                <div class="friend-pnl-ans">
+                                    {{$friend_user->name}}
+                                </div>
+                            </div>
+                            {{--Движение по зависимостям конец--}}
+                        @endforeach
+                @endif
+
+
                 @endforeach
                 {{--Вывод друга конец--}}
                 <div class="friends-panel-more">
-                    Друзья: {{$user->friend_exists->count()}}
+                    Друзья: {{$friends->count()}}
                 </div>
 
             </div>

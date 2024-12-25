@@ -150,65 +150,27 @@ class UserService
 
     public function addFriendRequestList(User $user)
     {
-        $check_request_friend = FriendsUsers::where([
-            ['to_user', $user->id],
-            ['from_user', auth()->user()->id]
-        ])->first();
 
-        $check_friend = Friends::where([
-            ['to_user', $user->id],
-            ['from_user', auth()->user()->id]
-        ])->first();
-
-        if ($check_request_friend != null && $check_friend == null) {
             try {
                 DB::beginTransaction();
 
-                $check_request_friend = FriendsUsers::where([
-                    ['to_user', $user->id],
-                    ['from_user', auth()->user()->id]
-                ])->delete();
+                $check_request_friend = FriendsUsers::where('to_user', $user->id)
+                    ->orWhere('from_user', $user->id)->update([
+                        'status' => 1
+                    ]);
+
                 dd($check_request_friend);
-                $result = Friends::create([
-                    'to_user' => $user->id,
-                    'from_user' => auth()->user()->id
-                ]);
 
                 DB::commit();
             } catch (\Exception $exception) {
                 dd($exception);
                 DB::rollBack();
             }
-        } else {
-            Session::put('request_exists', 'Вы уже отправили заявку этому пользователю');
         }
-    }
 
     public function deleteFriendRequest(User $user)
     {
-
-        $check_request_friend = FriendsUsers::where([
-            ['to_user', $user->id],
-            ['from_user', auth()->user()->id]
-        ])->delete();
-        dd($check_request_friend);
-    }
-
-    public function deleteFriendRequestList(User $user)
-    {
-
-        try {
-            DB::beginTransaction();
-            $check_request_friend = Friends::where([
-                ['to_user', $user->id],
-                ['from_user', auth()->user()->id]
-            ])->delete();
-            DB::commit();
-        } catch (\Exception $exception) {
-            dd($exception);
-            DB::rollBack();
-        }
-
+        $check_request_friend = FriendsUsers::where('to_user', $user->id,)->delete();
 
     }
 

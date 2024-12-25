@@ -51,6 +51,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function friends() {
         return $this->belongsToMany(Friends::class, 'friends_saved', 'to_user', 'from_user');
     }
+    public function friendsUsers() {
+        return $this->belongsToMany(FriendsUsers::class, 'new_friends', 'to_user', 'from_user');
+    }
     public function friend_exists() {
         return $this->hasMany(Friends::class, 'from_user','id');
     }

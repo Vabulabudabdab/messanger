@@ -11,9 +11,13 @@ class FriendsUsers extends Model
 
     protected $fillable = ['from_user', 'to_user'];
 
-    public function friends()
+    public function user()
     {
         return $this->hasMany(User::class, 'id', 'to_user');
+    }
+
+    public function user_from() {
+        return $this->hasMany(User::class, 'id', 'from_user');
     }
 
 }

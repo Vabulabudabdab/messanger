@@ -17,8 +17,6 @@ Route::group(['prefix' => '/', 'middleware' => 'auth'], function () {
 
     Route::post('/delete/friend/{user}', [\App\Http\Controllers\HomeController::class, 'delete_friend_request'])->name('delete.friend.request');
 
-    Route::post('/friends/delete/friend/{user}', [\App\Http\Controllers\HomeController::class, 'delete_friend_request_from_list'])->name('index.delete.request.friend');
-
     Route::post('/search/friend', [\App\Http\Controllers\HomeController::class, 'search_friends'])->name('index.profile.search.friend');
 
     Route::post('/create/post', [\App\Http\Controllers\HomeController::class, 'create_post'])->name('index.profile.create.post');

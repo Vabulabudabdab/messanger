@@ -11,6 +11,7 @@ use App\Models\FriendsUsers;
 use App\Models\Post;
 use App\Models\PostsLikeds;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends BaseController
 {
@@ -20,8 +21,16 @@ class HomeController extends BaseController
 
         $user_posts = Post::where('user_id', $user->id)->get();
         $postLikes = PostsLikeds::where('user_id', $user->id)->get();
-        $count = 0;
-        return view('Home.index', compact('user', 'user_posts', 'postLikes', 'count'));
+
+
+        $friends =  FriendsUsers::where('to_user', $user->id)->orWhere('from_user', $user->id)->get();
+
+
+//        (friend_one="$user_id" OR friend_two="$user_id")
+//        AND
+//        (friend_one="$friend_id" OR friend_two="$friend_id");
+
+        return view('Home.index', compact('user', 'user_posts', 'postLikes', 'friends'));
     }
 
     public function friend_requests()
@@ -90,14 +99,6 @@ class HomeController extends BaseController
         return redirect()->route('index.home', $auth_id);
     }
 
-    public function delete_friend_request_from_list(User $user) {
-
-        $this->userService->deleteFriendRequestList($user);
-
-        $auth_id = auth()->user()->id;
-
-        return redirect()->route('index.home', $auth_id);
-    }
 
     public function create_post(CreatePostRequest $request)
     {

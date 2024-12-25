@@ -35,7 +35,7 @@
                         </button>
                     </form>
 
-                    <form action="{{route('index.delete.request.friend', $user->id)}}" method="post">
+                    <form action="{{route('delete.friend.request', $user->id)}}" method="post">
                         @csrf
                         <button type="submit" class="btn-user" id="friend_request"
                                 style="margin-left: 50px; margin-top: 20px;">Отклонить заявку

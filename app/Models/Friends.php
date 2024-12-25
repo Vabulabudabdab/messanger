@@ -8,7 +8,7 @@ class Friends extends Model
 {
     protected $table = 'friends_saved';
 
-    protected $fillable = ['from_user', 'to_user'];
+    protected $fillable = ['from_user', 'to_user', 'status'];
 
     public function user() {
         return $this->hasMany(User::class, 'id', 'from_user');
